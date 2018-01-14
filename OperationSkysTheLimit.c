@@ -874,7 +874,7 @@ task NightRider (){
 | Done: Left                                                          |
 \*===================================================================*/
 void highGoalRedRight (){
-	char HighGoal_RedRight
+	char HighGoal_RedRight;
 
 	// score preload cone on high goal
 	claw (close);
@@ -885,41 +885,38 @@ void highGoalRedRight (){
 	wait1Msec(300);
 	// back off and turn for second cone
 	driveEncoder (-100, 5);
-	turnGyro (90, 105);                             //turn
-
-	//wait1Msec(300);
-	//driveLift (100, 4.5, 100, 2800);
-	//// pick up second cone
-	//claw (close);
-	//liftTime (100, 300, true);
-	//wait1Msec(300);
-	//turnGyro (90, 142, true);                       //turn
-
-	//wait1Msec(300);
-	//// score second cone
-	//driveLift (100, 8, 100, 1300, true);
-	//wait1Msec(300);
-	//liftTime (-80, 300, true);
-	//claw (open);
-	//wait1Msec(300);
-	//// back off and turn for third cone
-	//driveEncoder (-100, 5);
-	//turnGyro (-90, 160);                            //turn
-
-	//wait1Msec(300);
-	//driveLift (100, 6.5, 100, 2800);
-	//// pick up third cone
-	//claw (close);
-	//liftTime (100, 300, true);
-	//wait1Msec(300);
-	//turnGyro (90, 178, true);
-	//// score third cone
-	//driveLift (100, 22, 100, 1180, true);
-	//liftTime (-80, 300, true);
-	//wait1Msec(300);
-	//// back off
-	//claw (open);
-	//driveLift (-127, 8, 100, 2800);
+	turnGyro (90, 103);
+	wait1Msec(300);
+	driveLift (100, 4.5, 100, 2800);
+	// pick up second cone
+	claw (close);
+	liftTime (100, 300, true);
+	wait1Msec(300);
+	turnGyro (-90, 148, true);
+	wait1Msec(300);
+	// score second cone
+	driveLift (100, 9, 100, 1300, true);
+	wait1Msec(300);
+	liftTime (-80, 300, true);
+	claw (open);
+	wait1Msec(300);
+	// back off and turn for third cone
+	driveEncoder (-100, 5);
+	turnGyro (90, 158);
+	wait1Msec(300);
+	driveLift (100, 6.5, 100, 2800);
+	// pick up third cone
+	claw (close);
+	liftTime (100, 300, true);
+	wait1Msec(300);
+	turnGyro (-90, 180, true);
+	// score third cone
+	driveLift (100, 22, 100, 1180, true);
+	liftTime (-80, 300, true);
+	wait1Msec(300);
+	// back off
+	claw (open);
+	driveLift (-127, 8, 100, 2800);
 }
 
 void highGoalRedLeft (){
@@ -975,31 +972,28 @@ void highGoalBlueRight (){
 	wait1Msec(300);
 	// back off and turn for second cone
 	driveEncoder (-100, 5);
-	turnGyro (90, 93);                             //turn
-
-	//wait1Msec(300);
-	//driveLift (90, 23, 100, 2800);
-	//// pick up second cone
-	//claw (close);
-	//liftTime (100, 200, true);
-	//driveEncoder (-90, 20, true);
-	//wait1Msec(300);
-	//turnGyro (90, 125, true);                             //turn
-
-	//wait1Msec(300);
-	//// score second cone
-	//lift (100, 1300, true);
-	//driveEncoder (90, 5, true);
-	//wait1Msec(300);
-	//liftTime (-100, 300, true);
-	//claw (open);
-	//// drive tword third cone
-	//driveEncoder (-100, 7);
-	//turnGyro (-100, 130);                             //turn
-
-	//driveLift (100, 18, 100, 2800);
-	//wait1Msec(300);
-	//claw (close);
+	turnGyro (90, 91);
+	wait1Msec(300);
+	driveLift (90, 23, 100, 2800);
+	// pick up second cone
+	claw (close);
+	liftTime (100, 200, true);
+	driveEncoder (-90, 20, true);
+	wait1Msec(300);
+	turnGyro (-90, 133, true);
+	wait1Msec(300);
+	// score second cone
+	lift (100, 1300, true);
+	driveEncoder (90, 5, true);
+	wait1Msec(300);
+	liftTime (-100, 300, true);
+	claw (open);
+	// drive tword third cone
+	driveEncoder (-100, 7);
+	turnGyro (100, 140);
+	driveLift (100, 18, 100, 2800);
+	wait1Msec(300);
+	claw (close);
 }
 
 void highGoalBlueLeft (){
@@ -1097,7 +1091,7 @@ void skills (){
 
 	// pick up first mobile goal
 	driveEncoder (-80, 24);
-	mLift (120, 1250);
+	mLift (120, 1150);
 	driveEncoder (80, 19);
 	wait1Msec(300);
 	turnGyro (-70, 97);
@@ -1107,7 +1101,7 @@ void skills (){
 	// scores first mobile goal
 	driveTime (-127, 1200);
 	wait1Msec(300);
-	driveEncoder (70, 20);
+	driveEncoder (70, 18);
 	startTask (resetMobileGoal);
 	turnGyro (-70, 90);
 	// picks up second mobile goal
@@ -1116,12 +1110,28 @@ void skills (){
 	turnGyro (-70, 85);
 	wait1Msec(300);
 	driveEncoder (-120, 25);
-	mLift (120, 1100);
+	mLift (120, 850);
 	// scores second mobile goal
 	driveEncoder (80, 15);
 	turnGyro (90, 180);
 	driveEncoder (-80, 5);
 	driveTime (-127, 650);
+	// turns for third mobile goal
+	wait1Msec(300);
+	driveEncoder (90, 7);
+	startTask (resetMobileGoal);
+	wait1Msec(300);
+	turnGyro (75, 187);
+	wait1Msec(300);
+	// bull doze time
+	driveEncoder (-100, 40);
+	mLift (120, 1150);
+	driveEncoder (-100, 28);
+	wait1Msec(300);
+	turnGyro (90, 90);
+	driveEncoder (-100, 9);
+	turnGyro (-90, 90);
+	driveTime (-127, 1200);
 
 }
 
@@ -1133,47 +1143,6 @@ void skills (){
 void test (){
 	char test;
 
-	//claw (127, 500);
-	//driveLift (120, 8.25, 80, 1400, true);
-	//wait1Msec(300);
-	//liftTime (-60, 230);
-	//claw (-80, 120);
-	//driveEncoder (-120, 5);
-	////turn second cone
-	//turnGyro (-80, 90);
-	//wait1Msec (50);
-	//driveLift (120, 5, 60, 2600);
-	//claw (127, 500);
-	//lift (1300, 80, true);
-	//wait1Msec(300);
-	//turnGyro (80, 140, true);
-	//wait1Msec(300);
-	//driveEncoder (120, 11, true);
-	//wait1Msec(300);
-	//liftTime (-80, 300);
-	//claw (-80, 120);
-	//driveEncoder (-120, 5);
-	//wait1Msec(300);
-	//turnGyro (-80, 170);
-	//wait1Msec(300);
-	//driveLift (120, 5, 60, 2600);
-
-	//claw (close);
-	//liftTime (127, 50);
-	//driveTime (127, 10000);
-
-	claw (close);
-	wait1Msec(400);
-	claw (open);
-	wait1Msec(400);
-	claw (close);
-	wait1Msec(400);
-	claw (open);
-	wait1Msec(400);
-	claw (close);
-	wait1Msec(400);
-	claw (open);
-	wait1Msec(400);
 }
 
 /*===================================================================*\
@@ -1211,6 +1180,8 @@ void pre_auton(){
 	// sensor set up
 	intSensor ();
 	setDrive ();
+	// reset mobile goal lift
+	startTask (resetMobileGoal);
 }
 
 /*------------------------------------------------------------------*\
