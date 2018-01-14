@@ -46,7 +46,6 @@ bool RespectsWomen = false;
 \*===================================================================*/
 int testNum = 0;
 int eDriveTicks = 392;
-//int eTurnTicks = 6;       //Change
 int wheelDiameter = 4;
 int myAutonomous = 100;
 int liftHold = 10;
@@ -213,35 +212,13 @@ void driveTime (int speed, int mSec, bool clawHold = false){
 	// starts the timer used for the method
 	clearTimer(T2);
 
-	//// checks for the first 10% of the time
-	//while (time1[T2] < mSec * .1){
-	//	// calculates the right side modification that needs to be applied
-	//	int rDiff = abs(SensorValue[LeftEncoder]) - abs(SensorValue[RightEncoder]);
-	//	float rMod = sgn(rDiff) * speed * rModMulti;
-
-	//	// reduces the power of the motors to account for drift
-	//	motor[RightDrive] = speed/1.5;
-	//	motor[LeftDrive] = speed/1.5 + rMod;
-	//}
-
-	//// checks for the majority (10% - 80%) of the time
-	//while (time1[T2] < mSec * .7){
-	//	// calculates the right side modification that needs to be applied
-	//	int rDiff = abs(SensorValue[LeftEncoder]) - abs(SensorValue[RightEncoder]);
-	//	float rMod = sgn(rDiff) * speed * rModMulti;
-
-	//	// applies the desiered power from the method call
-	//	motor[RightDrive] = speed;
-	//	motor[LeftDrive] = speed + rMod;
-	//}
-
-	// checks for the last 20% of the time
+	// checks for the current time and compares to desiered time
 	while (time1[T2] < mSec){
 		// calculates the right side modification that needs to be applied
 		float rDiff = abs(SensorValue[LeftEncoder]) - abs(SensorValue[RightEncoder]);
 		float rMod = sgn(rDiff) * speed * rModMulti;
 
-		// reduces the power of the motor to account for drift as the robot stops
+		// applies desiered motor speed
 		motor[RightDrive] = speed;
 		motor[LeftDrive] = speed + rMod;
 	}
@@ -894,25 +871,58 @@ task NightRider (){
 /*===================================================================*\
 | Red.................................................................|
 |---------------------------------------------------------------------|
-|                                                                     |
+| Done: Left                                                          |
 \*===================================================================*/
-void highGoalRedRight (int cones)
-{
-	if (cones == 2)
-	{
-		char HighGoal_RedRight_2;
+void highGoalRedRight (){
+	char HighGoal_RedRight
 
-	}
+	// score preload cone on high goal
+	claw (close);
+	driveLift (100, 11, 100, 1500, true);
+	wait1Msec(300);
+	liftTime (-80, 200);
+	claw (open);
+	wait1Msec(300);
+	// back off and turn for second cone
+	driveEncoder (-100, 5);
+	turnGyro (90, 105);                             //turn
 
-	else if (cones == 3)
-	{
-		char HighGoal_RedRight_3;
+	//wait1Msec(300);
+	//driveLift (100, 4.5, 100, 2800);
+	//// pick up second cone
+	//claw (close);
+	//liftTime (100, 300, true);
+	//wait1Msec(300);
+	//turnGyro (90, 142, true);                       //turn
 
-	}
+	//wait1Msec(300);
+	//// score second cone
+	//driveLift (100, 8, 100, 1300, true);
+	//wait1Msec(300);
+	//liftTime (-80, 300, true);
+	//claw (open);
+	//wait1Msec(300);
+	//// back off and turn for third cone
+	//driveEncoder (-100, 5);
+	//turnGyro (-90, 160);                            //turn
+
+	//wait1Msec(300);
+	//driveLift (100, 6.5, 100, 2800);
+	//// pick up third cone
+	//claw (close);
+	//liftTime (100, 300, true);
+	//wait1Msec(300);
+	//turnGyro (90, 178, true);
+	//// score third cone
+	//driveLift (100, 22, 100, 1180, true);
+	//liftTime (-80, 300, true);
+	//wait1Msec(300);
+	//// back off
+	//claw (open);
+	//driveLift (-127, 8, 100, 2800);
 }
 
-void highGoalRedLeft ()
-{
+void highGoalRedLeft (){
 	char HighGoal_RedLeft;
 
 	// score preload cone on high goal
@@ -946,76 +956,98 @@ void highGoalRedLeft ()
 	driveLift (100, 18, 100, 2800);
 	wait1Msec(300);
 	claw (close);
-
 }
 
 /*===================================================================*\
 | Blue................................................................|
 |---------------------------------------------------------------------|
-|                                                                     |
+| Done: Left                                                          |
 \*===================================================================*/
-void highGoalBlueRight ()
-{
+void highGoalBlueRight (){
 	char HighGoal_BlueRight;
 
+	// score preload cone on high goal
+	claw (close);
+	driveLift (100, 11, 100, 1500, true);
+	wait1Msec(300);
+	liftTime (-80, 200);
+	claw (open);
+	wait1Msec(300);
+	// back off and turn for second cone
+	driveEncoder (-100, 5);
+	turnGyro (90, 93);                             //turn
+
+	//wait1Msec(300);
+	//driveLift (90, 23, 100, 2800);
+	//// pick up second cone
+	//claw (close);
+	//liftTime (100, 200, true);
+	//driveEncoder (-90, 20, true);
+	//wait1Msec(300);
+	//turnGyro (90, 125, true);                             //turn
+
+	//wait1Msec(300);
+	//// score second cone
+	//lift (100, 1300, true);
+	//driveEncoder (90, 5, true);
+	//wait1Msec(300);
+	//liftTime (-100, 300, true);
+	//claw (open);
+	//// drive tword third cone
+	//driveEncoder (-100, 7);
+	//turnGyro (-100, 130);                             //turn
+
+	//driveLift (100, 18, 100, 2800);
+	//wait1Msec(300);
+	//claw (close);
 }
 
-void highGoalBlueLeft (int cones)
-{
-	if (cones == 2)
-	{
-		char HighGoal_BlueLeft_2;
+void highGoalBlueLeft (){
+	char HighGoal_BlueLeft;
 
-	}
-
-	else if (cones == 3)
-	{
-		char HighGoal_BlueLeft_3;
-
-		//int driveSpeed, float distance, int liftSpeed, int height, bool clawHold = false
-
-		// score preload cone on high goal
-		claw (close);
-		driveLift (100, 11, 100, 1500, true);
-		wait1Msec(300);
-		liftTime (-80, 200);
-		claw (open);
-		wait1Msec(300);
-		// back off and turn for second cone
-		driveEncoder (-100, 5);
-		turnGyro (-90, 105);
-		wait1Msec(300);
-		driveLift (100, 4.5, 100, 2800);
-		// pick up second cone
-		claw (close);
-		liftTime (100, 300, true);
-		wait1Msec(300);
-		turnGyro (90, 142, true);
-		wait1Msec(300);
-		// score second cone
-		driveLift (100, 8, 100, 1300, true);
-		wait1Msec(300);
-		liftTime (-80, 300, true);
-		claw (open);
-		wait1Msec(300);
-		// back off and turn for third cone
-		driveEncoder (-100, 5);
-		turnGyro (-90, 160);
-		wait1Msec(300);
-		driveLift (100, 6.5, 100, 2800);
-		// pick up third cone
-		claw (close);
-		liftTime (100, 300, true);
-		wait1Msec(300);
-		turnGyro (90, 178, true);
-		// score third cone
-		driveLift (100, 22, 100, 1180, true);
-		liftTime (-80, 300, true);
-		wait1Msec(300);
-		claw (open);
-		driveLift (-127, 8, 100, 2800);
-	}
+	// score preload cone on high goal
+	claw (close);
+	driveLift (100, 11, 100, 1500, true);
+	wait1Msec(300);
+	liftTime (-80, 200);
+	claw (open);
+	wait1Msec(300);
+	// back off and turn for second cone
+	driveEncoder (-100, 5);
+	turnGyro (-90, 105);
+	wait1Msec(300);
+	driveLift (100, 4.5, 100, 2800);
+	// pick up second cone
+	claw (close);
+	liftTime (100, 300, true);
+	wait1Msec(300);
+	turnGyro (90, 142, true);
+	wait1Msec(300);
+	// score second cone
+	driveLift (100, 8, 100, 1300, true);
+	wait1Msec(300);
+	liftTime (-80, 300, true);
+	claw (open);
+	wait1Msec(300);
+	// back off and turn for third cone
+	driveEncoder (-100, 5);
+	turnGyro (-90, 160);
+	wait1Msec(300);
+	driveLift (100, 6.5, 100, 2800);
+	// pick up third cone
+	claw (close);
+	liftTime (100, 300, true);
+	wait1Msec(300);
+	turnGyro (90, 178, true);
+	// score third cone
+	driveLift (100, 22, 100, 1180, true);
+	liftTime (-80, 300, true);
+	wait1Msec(300);
+	// back off
+	claw (open);
+	driveLift (-127, 8, 100, 2800);
 }
+
 
 /*------------------------------------------------------------------*\
 //	___  ___      _     _ _        _____             _
@@ -1029,7 +1061,7 @@ void highGoalBlueLeft (int cones)
 /*===================================================================*\
 | Red.................................................................|
 |---------------------------------------------------------------------|
-|                                                                     |
+| Done: none                                                          |
 \*===================================================================*/
 void mobileGoalRed (){
 	char MobileGoal_Red;
@@ -1039,7 +1071,7 @@ void mobileGoalRed (){
 /*===================================================================*\
 | Blue................................................................|
 |---------------------------------------------------------------------|
-|                                                                     |
+| Done: none                                                          |
 \*===================================================================*/
 void mobileGoalBlue (){
 	char MobileGoal_Blue;
@@ -1058,7 +1090,7 @@ void mobileGoalBlue (){
 /*===================================================================*\
 | Skills..............................................................|
 |---------------------------------------------------------------------|
-|                                                                     |
+| Points: 30                                                          |
 \*===================================================================*/
 void skills (){
 	char skills;
@@ -1208,13 +1240,13 @@ task autonomous(){
 	case 2: //High Goal Red L
 		displayLCDCenteredString(0, autonThree); displayLCDCenteredString(1, "Running!"); highGoalBlueRight (); break;
 	case 3: //High Goal Blue R
-		displayLCDCenteredString(0, autonFour); displayLCDCenteredString(1, "Running!"); highGoalRedRight (2); break;
+		displayLCDCenteredString(0, autonFour); displayLCDCenteredString(1, "Running!"); highGoalRedRight (); break;
 	case 4: //High Goal Blue L
-		displayLCDCenteredString(0, autonFive); displayLCDCenteredString(1, "Running!"); highGoalBlueLeft (2); break;
+		displayLCDCenteredString(0, autonFive); displayLCDCenteredString(1, "Running!"); highGoalBlueLeft (); break;
 	case 5: //Mobile Goal Red R
-		displayLCDCenteredString(0, autonSix); displayLCDCenteredString(1, "Running!"); highGoalRedRight (3); break;
+		displayLCDCenteredString(0, autonSix); displayLCDCenteredString(1, "Running!"); highGoalRedRight (); break;
 	case 6: //Mobile Goal Red L
-		displayLCDCenteredString(0, autonSeven); displayLCDCenteredString(1, "Running!"); highGoalBlueLeft (3); break;
+		displayLCDCenteredString(0, autonSeven); displayLCDCenteredString(1, "Running!"); highGoalBlueLeft (); break;
 	case 7: //Mobile Goal Blue R
 		displayLCDCenteredString(0, autonEight); displayLCDCenteredString(1, "Running!"); mobileGoalRed (); break;
 	case 8: //Mobile Goal Left
@@ -1405,11 +1437,10 @@ task usercontrol(){
 				displayLCD();
 			// sets to high goal red
 			if (vexRT[Btn7R] == 1)
-				myAutonomous = 3;
+				myAutonomous = 5;
 			// sets to high goal blue
 			if (vexRT[Btn7L] == 1)
-				myAutonomous = 4;
-
+				myAutonomous = 6;
 			//checks for jumper
 			if (SensorValue[Jumper] == 0){
 				if (vexRT[Btn8U] == 1){
