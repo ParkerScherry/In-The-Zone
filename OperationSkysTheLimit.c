@@ -63,8 +63,8 @@ string mainBattery, backupBattery;
 const string autonOne = "Skills";
 const string autonTwo = "North Union Red";
 const string autonThree = "North Union Blue";
-const string autonFour = "High Goal Red -";
-const string autonFive = "High Goal Blue -";
+const string autonFour = "Im Sorry";
+const string autonFive = "NULL";
 const string autonSix = "High Goal Red";
 const string autonSeven = "High Goal Blue";
 const string autonEight = "Mobile Red";
@@ -871,7 +871,7 @@ task NightRider (){
 /*===================================================================*\
 | Red.................................................................|
 |---------------------------------------------------------------------|
-| Done: Left                                                          |
+| Done: Left, Right                                                   |
 \*===================================================================*/
 void highGoalRedRight (){
 	char HighGoal_RedRight;
@@ -958,7 +958,7 @@ void highGoalRedLeft (){
 /*===================================================================*\
 | Blue................................................................|
 |---------------------------------------------------------------------|
-| Done: Left                                                          |
+| Done: Left, Right                                                   |
 \*===================================================================*/
 void highGoalBlueRight (){
 	char HighGoal_BlueRight;
@@ -1084,7 +1084,7 @@ void mobileGoalBlue (){
 /*===================================================================*\
 | Skills..............................................................|
 |---------------------------------------------------------------------|
-| Points: 30                                                          |
+| Points: 50                                                          |
 \*===================================================================*/
 void skills (){
 	char skills;
@@ -1105,34 +1105,92 @@ void skills (){
 	startTask (resetMobileGoal);
 	turnGyro (-70, 90);
 	// picks up second mobile goal
+	wait1Msec(300);
 	driveEncoder (80, 12);
-	wait1Msec(300);
-	turnGyro (-70, 85);
-	wait1Msec(300);
-	driveEncoder (-120, 25);
+	wait1Msec(500);
+	turnGyro (-70, 77);
+	wait1Msec(500);
+	driveEncoder (-120, 23);
 	mLift (120, 850);
 	// scores second mobile goal
-	driveEncoder (80, 15);
-	turnGyro (90, 180);
-	driveEncoder (-80, 5);
-	driveTime (-127, 650);
+	driveEncoder (80, 11);
+	wait1Msec(500);
+	turnGyro (70, 170);
+	wait1Msec(500);
+	driveEncoder (-80, 3);
+	driveTime (-127, 600);
 	// turns for third mobile goal
-	wait1Msec(300);
 	driveEncoder (90, 7);
 	startTask (resetMobileGoal);
-	wait1Msec(300);
-	turnGyro (75, 187);
-	wait1Msec(300);
+	wait1Msec(500);
+	turnGyro (75, 190);
+	wait1Msec(500);
 	// bull doze time
 	driveEncoder (-100, 40);
 	mLift (120, 1150);
-	driveEncoder (-100, 28);
+	driveEncoder (-100, 25);
 	wait1Msec(300);
 	turnGyro (90, 90);
-	driveEncoder (-100, 9);
-	turnGyro (-90, 90);
+	wait1Msec(300);
+	driveEncoder (-100, 8);
+	wait1Msec(300);
+	turnGyro (-90, 83);
+	wait1Msec(300);
 	driveTime (-127, 1200);
+	// picks up fourth goal
+	driveEncoder (70, 15);
+	startTask (resetMobileGoal);
+	wait1Msec(200);
+	turnGyro (80, 90);
+	driveEncoder (-90, 10);
+	turnGyro (80, 96);
+	wait1Msec(300);
+	driveEncoder (-90, 20);
+	mLift (120, 850);
+	// score fourth goal
+	wait1Msec(500);
+	turnGyro (90, 180);
+	wait1Msec(500);
+	driveEncoder (-80, 7);
+	driveTime (-120, 1000);
+	// back off to grab fifth goal
+	driveEncoder (100, 2);
+	wait1Msec(300);
+	turnGyro (-85, 90);
+	wait1Msec(300);
+	driveEncoder (-100, 22);
+	wait1Msec(300);
+	turnGyro (-90, 35);
+	wait1Msec(300);
+	startTask (resetMobileGoal);
+	driveEncoder (-100, 20);
+	driveTime (-100, 500);
+	// pick up fifth goal
+	mLift (120, 1100);
+	driveEncoder (100, 30);
+	turnGyro (100, 45);
+	driveEncoder (100, 6);
+	turnGyro (100, 100);
+	// score final goal
+	driveTime (-127, 800);
+	driveTime (127, 850);
+	turnGyro (100, 30);
+	driveTime (127, 600);
 
+}
+
+/*===================================================================*\
+| Test................................................................|
+|---------------------------------------------------------------------|
+|                                                                     |
+\*===================================================================*/
+void operationSkysTheLimit (){
+	char operationSkysTheLimit;
+
+	// arming sequence
+	lift (120, 2500);
+	// blast off
+	driveTime (120, 10000);
 }
 
 /*===================================================================*\
@@ -1142,6 +1200,7 @@ void skills (){
 \*===================================================================*/
 void test (){
 	char test;
+
 
 }
 
@@ -1181,7 +1240,7 @@ void pre_auton(){
 	intSensor ();
 	setDrive ();
 	// reset mobile goal lift
-	startTask (resetMobileGoal);
+	//startTask (resetMobileGoal);
 }
 
 /*------------------------------------------------------------------*\
@@ -1211,9 +1270,9 @@ task autonomous(){
 	case 2: //High Goal Red L
 		displayLCDCenteredString(0, autonThree); displayLCDCenteredString(1, "Running!"); highGoalBlueRight (); break;
 	case 3: //High Goal Blue R
-		displayLCDCenteredString(0, autonFour); displayLCDCenteredString(1, "Running!"); highGoalRedRight (); break;
+		displayLCDCenteredString(0, autonFour); displayLCDCenteredString(1, "Truly I am Sorry"); operationSkysTheLimit (); break;
 	case 4: //High Goal Blue L
-		displayLCDCenteredString(0, autonFive); displayLCDCenteredString(1, "Running!"); highGoalBlueLeft (); break;
+		displayLCDCenteredString(0, autonFive); displayLCDCenteredString(1, "Running!"); test (); break;
 	case 5: //Mobile Goal Red R
 		displayLCDCenteredString(0, autonSix); displayLCDCenteredString(1, "Running!"); highGoalRedRight (); break;
 	case 6: //Mobile Goal Red L
@@ -1225,7 +1284,7 @@ task autonomous(){
 	case 9: //Special
 		displayLCDCenteredString(0, autonTen); displayLCDCenteredString(1, "Running!"); special (); break;
 	default: //Test
-		displayLCDCenteredString(0, autonTest); displayLCDCenteredString(1, "Running!"); skills (); break;
+		displayLCDCenteredString(0, autonTest); displayLCDCenteredString(1, "Running!"); test (); break;
 	}
 	EndTimeSlice();
 }
